@@ -1,17 +1,21 @@
 import React from 'react';
 import './App.css';
+import StarWars from "./components/StarWars.js";
+import styled from 'styled-components';
+
+const Header = styled.div`
+  background-color:	#4D2113;
+  font-size: 3em;
+`;
 
 const App = () => {
-  // Try to think through what state you'll need for this app before starting. Then build out
-  // the state properties here.
-
-  // Fetch characters from the star wars api in an effect hook. Remember, anytime you have a 
-  // side effect in a component, you want to think about which state and/or props it should
-  // sync up with, if any.
 
   return (
     <div className="App">
-      <h1 className="Header">React Wars</h1>
+      <Header className="Header">React Wars</Header>
+      <section>
+        <StarWars limit={10} />
+      </section>
     </div>
   );
 }
