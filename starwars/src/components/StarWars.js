@@ -10,29 +10,53 @@ const CardBox = styled.div`
     justify-content:center;
 `;
 
+const ButtonDiv = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    padding-top: 1em;
+`;
+
+const Button = styled.button`
+    padding: 0.5em;
+    margin: 5px;
+    border: 0.05em solid #402F23;
+    border-radius: 1em;
+    color: white;
+    background-color: #998A79;
+`;
+
 const StarWars = () => {
     const [charactersAll, setCharactersAll] = useState([]);
+    const [page, setPage] = useState(1)
+
+    const Click = e => {
+        console.log(page)
+        e.target.value === 'next' ? setPage(page + 1) : setPage(page - 1)
+      }
   
     useEffect(() => {
       axios
-        .get(`https://swapi.co/api/people/`)
+        .get(`https://swapi.co/api/people/?page=${page}`)
         .then(res => {
           console.log("res", res);
           setCharactersAll(res.data.results);
         })
         .catch(err => console.log("This is not working!"));
-    }, []);
+    }, [page]);
   
     return (
         <div>
-        <h1>Participants</h1>
+            <ButtonDiv>
+                <Button disabled={charactersAll.previous === null ? true : false} onClick={Click}value='previous'>Previous</Button>
+                <Button disabled={charactersAll.next === null ? true : false} onClick={Click} value='next'>Next</Button>
+            </ButtonDiv>
             <CardBox>
                 
                 {charactersAll.map(characters => (
                 <Card characters={characters}/>
                 ))}
             </CardBox>
-      </div>
+        </div>
     );
   }
   

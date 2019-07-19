@@ -8,7 +8,7 @@ const CardStyle = styled.div`
     display: flex;
     justify-content: center;
     width: 20em;
-    height: 10em;
+    height: auto;
     border-radius: 1em;
     background: rgba(205, 178, 148, 0.5);
 `;
@@ -26,9 +26,11 @@ const Card = props => {
                     {props.characters.name}
                 </Header1> 
                 <div>
-                    <img src={props.characters.url}/>
+                    <p>Gender: {props.characters.gender}</p>
+                    <p>Eye Color: {props.characters.eye_color}</p>
+                    <p>Height: {props.characters.height}</p>
+                    <p>Weight: {props.characters.mass}</p>
                 </div>
-                <p>Height: {props.characters.height}</p>
             </div>
         </CardStyle>
     );
